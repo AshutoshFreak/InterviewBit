@@ -1,6 +1,8 @@
 #include<iostream>
 #include<unordered_map>
 #include<vector>
+#include<bits/stdc++.h>
+#include<algorithm>
 
 using namespace std;
 
@@ -14,14 +16,15 @@ class Solution
         table[0] = -1;
         for(i = 0; i < A.size(); i++)
         {
-            if(A[i] == 0)
-                A[i] = -1;
-            sum += A[i];
+            if(A[i] == 1)
+                sum++;
+            else
+                sum--;
             if(table.find(sum) == table.end())
                 table.insert({sum, i});
             if(table.find(sum-1) != table.end())
             {
-                if(i-table[sum-1] > max)
+                if(max < i-table[sum-1])
                     max = i-table[sum-1];
             }
         }
@@ -31,7 +34,7 @@ class Solution
 
 int main()
 {
-    vector<int> A = {0, 1, 0, 0, 1, 0};
+    vector<int> A = {0, 1, 1, 0, 0, 1};
     Solution *s = new Solution();
     cout << s->longestSubarrayLength(A);
 }
